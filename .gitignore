@@ -1,0 +1,35 @@
+# Build
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Appium / local
+apps/*.apk
+!apps/.gitkeep
+reports/
+test-output/
+allure-results/
+allure-report/
+screenshots/
+logs/
+*.log
+
+# Secrets / local overrides
+src/test/resources/config.local.properties
+.env
+*.pem

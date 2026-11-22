@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mobile Appium Android Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.prasandeep.mobile.listeners.TestListener"/>
+    </listeners>
+
+    <test name="Login and Error States">
+        <classes>
+            <class name="com.prasandeep.mobile.tests.LoginTests"/>
+            <class name="com.prasandeep.mobile.tests.ErrorStateTests"/>
+        </classes>
+    </test>
+
+    <test name="Form Inputs">
+        <classes>
+            <class name="com.prasandeep.mobile.tests.FormInputTests"/>
+        </classes>
+    </test>
+</suite>
