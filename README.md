@@ -58,14 +58,21 @@ appium
 # Terminal 2 — start emulator (example)
 emulator -avd Pixel_6_API_34
 
-# Terminal 3 — run suite
-mvn clean test
+# Terminal 3 — run suite (use mvnw — Maven is not required on PATH)
+.\mvnw.cmd clean test
+```
+
+Set JDK first in that terminal:
+
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Java\jdk-17"
+$env:Path = "$env:JAVA_HOME\bin;$env:Path"
 ```
 
 Smoke-only:
 
-```bash
-mvn test -Dgroups=smoke
+```powershell
+.\mvnw.cmd test "-Dtest=LoginTests#validLoginShowsProducts"
 ```
 
 Reports:
