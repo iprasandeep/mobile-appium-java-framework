@@ -6,23 +6,29 @@ Built for interview / portfolio use by **prasandeep** — covers **login**, **fo
 
 ## Architecture
 
+Layered design (interview-friendly):
+
 ```text
-mobile-appium-java-framework
-├── pages/          Page Objects (Catalog, Login, Checkout form, …)
-├── driver/         AndroidDriver lifecycle (thread-local)
-├── config/         Properties + env overrides
-├── utils/          Explicit waits + screenshots
-├── tests/          TestNG suites (login / forms / errors)
-└── listeners/      ExtentReports + failure screenshots
+tests/          Thin scenarios — call actions + validators only
+validators/     Assertions (Assert.*)
+actions/        Clicks, type, navigation (uses locators)
+locators/       By locators only — no logic
+base/           BaseActions (tap/type/wait) + BaseTest
+driver/         AndroidDriver lifecycle
+config/         Properties + env overrides
+utils/          Waits + screenshots
+listeners/      Extent + Allure
 ```
 
 ```mermaid
 flowchart LR
-  TestNG[TestNG tests] --> Pages[Page Objects]
-  Pages --> Driver[DriverManager]
+  Tests[tests] --> Actions[actions]
+  Tests --> Validators[validators]
+  Validators --> Actions
+  Actions --> Locators[locators]
+  Actions --> Base[BaseActions]
+  Base --> Driver[DriverManager]
   Driver --> Appium[Appium Server]
-  Appium --> Emulator[Android Emulator]
-  TestNG --> Reports[ExtentReports + screenshots]
 ```
 
 ## Prerequisites
@@ -100,8 +106,8 @@ Full UI suite stays **local** (needs emulator + Appium).
 
 ## Interview talking points
 
-- POM keeps locators out of tests; pages model user flows
-- Explicit waits over implicit sleeps; screenshots + Extent on failure
+- Locators / Actions / Validators / Tests are separated (not classic fat POM)
+- Explicit waits over implicit sleeps; screenshots + Extent/Allure on failure
 - Config layered: properties → system props → env vars
 - Suite groups: `smoke`, `login`, `forms`, `negative`
 

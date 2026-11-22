@@ -1,50 +1,50 @@
 package com.prasandeep.mobile.tests;
 
+import com.prasandeep.mobile.actions.CheckoutActions;
 import com.prasandeep.mobile.base.BaseTest;
 import com.prasandeep.mobile.config.ConfigReader;
-import com.prasandeep.mobile.pages.CheckoutFormPage;
-import com.prasandeep.mobile.pages.LoginPage;
-import org.testng.Assert;
+import com.prasandeep.mobile.validators.CheckoutValidator;
 import org.testng.annotations.Test;
 
+/** Thin form tests: navigate via actions, assert via validators. */
 public class FormInputTests extends BaseTest {
 
     @Test(groups = {"forms", "smoke"}, description = "Logged-in user can reach checkout address form")
     public void checkoutAddressFormIsReachable() {
-        LoginPage loginPage = catalogPage.openLoginFromMenu();
-        loginPage.loginAs(ConfigReader.get("valid.username"), ConfigReader.get("valid.password"));
+        catalog.openLoginFromMenu()
+                .loginAs(ConfigReader.get("valid.username"), ConfigReader.get("valid.password"));
 
-        CheckoutFormPage form = catalogPage
+        CheckoutActions form = catalog
                 .openFirstProduct()
                 .addToCart()
                 .openCart()
                 .proceedToCheckout();
 
-        Assert.assertTrue(form.isFormDisplayed(), "Checkout address form should be displayed");
+        new CheckoutValidator(form).assertFormDisplayed();
     }
 
     @Test(groups = {"forms"}, description = "Valid address fields can be filled on checkout form")
     public void fillValidCheckoutAddressFields() {
-        catalogPage.openLoginFromMenu()
+        catalog.openLoginFromMenu()
                 .loginAs(ConfigReader.get("valid.username"), ConfigReader.get("valid.password"));
 
-        CheckoutFormPage form = catalogPage
+        CheckoutActions form = catalog
                 .openFirstProduct()
                 .addToCart()
                 .openCart()
                 .proceedToCheckout()
                 .fillValidAddress();
 
-        Assert.assertTrue(form.isFormDisplayed(), "Form should still be visible after filling fields");
+        new CheckoutValidator(form).assertFormStillVisibleAfterFill();
         form.submitToPayment();
     }
 
     @Test(groups = {"forms", "negative"}, description = "Submitting empty required name keeps user on form")
     public void emptyRequiredNameKeepsFormVisible() {
-        catalogPage.openLoginFromMenu()
+        catalog.openLoginFromMenu()
                 .loginAs(ConfigReader.get("valid.username"), ConfigReader.get("valid.password"));
 
-        CheckoutFormPage form = catalogPage
+        CheckoutActions form = catalog
                 .openFirstProduct()
                 .addToCart()
                 .openCart()
@@ -55,7 +55,6 @@ public class FormInputTests extends BaseTest {
                 .enterCountry("India")
                 .submitToPayment();
 
-        Assert.assertTrue(form.isFormDisplayed() || form.isFullNameErrorVisible(),
-                "Empty required full name should keep checkout form / show validation");
+        new CheckoutValidator(form).assertRequiredNameValidationKeepsForm();
     }
 }

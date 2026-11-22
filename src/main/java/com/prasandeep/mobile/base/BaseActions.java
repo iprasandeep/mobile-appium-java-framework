@@ -1,4 +1,4 @@
-package com.prasandeep.mobile.pages;
+package com.prasandeep.mobile.base;
 
 import com.prasandeep.mobile.driver.DriverManager;
 import com.prasandeep.mobile.utils.WaitUtils;
@@ -7,9 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
- * Shared page helpers for explicit waits and common actions.
+ * Shared interaction helpers (tap / type / read). Locators stay in locator classes;
+ * screen flows live in *Actions; assertions live in *Validator.
  */
-public abstract class BasePage {
+public abstract class BaseActions {
 
     protected AndroidDriver driver() {
         return DriverManager.getDriver();
