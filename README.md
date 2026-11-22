@@ -75,10 +75,16 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk-17"
 $env:Path = "$env:JAVA_HOME\bin;$env:Path"
 ```
 
-Smoke-only:
+Smoke / single test:
 
 ```powershell
 .\mvnw.cmd test "-Dtest=LoginTests#validLoginShowsProducts"
+```
+
+Full sanity suite (all cases in one class):
+
+```powershell
+.\mvnw.cmd test "-DsuiteXmlFile=src/test/resources/sanity-suite.xml"
 ```
 
 Reports:

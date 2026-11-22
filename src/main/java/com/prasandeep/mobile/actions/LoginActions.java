@@ -8,20 +8,24 @@ public class LoginActions extends BaseActions {
 
     public LoginActions enterUsername(String username) {
         type(LoginLocators.USERNAME, username);
+        hideKeyboardQuietly();
         return this;
     }
 
     public LoginActions enterPassword(String password) {
         type(LoginLocators.PASSWORD, password);
+        hideKeyboardQuietly();
         return this;
     }
 
     public CatalogActions submitLogin() {
+        hideKeyboardQuietly();
         tap(LoginLocators.LOGIN_BUTTON);
         return new CatalogActions();
     }
 
     public LoginActions submitLoginExpectingError() {
+        hideKeyboardQuietly();
         tap(LoginLocators.LOGIN_BUTTON);
         return this;
     }

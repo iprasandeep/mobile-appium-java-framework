@@ -31,4 +31,16 @@ public final class WaitUtils {
     public static boolean invisible(By locator) {
         return explicitWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
+
+    /** Short presence check for validators (avoids 20s false waits). */
+    public static boolean isVisible(By locator, int timeoutSeconds) {
+        try {
+            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeoutSeconds))
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
 }
+

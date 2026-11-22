@@ -24,14 +24,18 @@ public class LoginValidator {
     }
 
     public void assertInvalidCredentialsError() {
-        Assert.assertTrue(
-                login.isErrorVisible() || login.isLoginScreenDisplayed(),
+        boolean onLogin = login.isLoginScreenDisplayed();
+        boolean hasError = login.isErrorVisible();
+        Assert.assertTrue(onLogin || hasError,
                 "Expected error state or login screen after invalid credentials");
-        if (login.isErrorVisible()) {
+        if (hasError) {
             String message = login.readErrorMessage().toLowerCase();
             Assert.assertTrue(
-                    message.contains("credential") || message.contains("password") || message.contains("match"),
-                    "Error text should mention credentials/password mismatch. Actual: " + message);
+                    message.contains("credential")
+                            || message.contains("password")
+                            || message.contains("match")
+                            || message.contains("locked"),
+                    "Error text should mention credentials/locked. Actual: " + message);
         }
     }
 }

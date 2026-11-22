@@ -19,13 +19,13 @@ public class ErrorStateTests extends BaseTest {
         new LoginValidator(loginScreen).assertInvalidCredentialsError();
     }
 
-    @Test(groups = {"negative", "login"}, description = "Unknown user cannot authenticate")
-    public void unknownUserCannotLogin() {
+    @Test(groups = {"negative", "login"}, description = "Blank username keeps user on login with validation")
+    public void blankUsernameShowsValidation() {
         LoginActions loginScreen = catalog.openLoginFromMenu()
-                .enterUsername("not_a_real_user@example.com")
-                .enterPassword("WrongPass123!")
+                .enterUsername("")
+                .enterPassword(ConfigReader.get("valid.password"))
                 .submitLoginExpectingError();
 
-        new LoginValidator(loginScreen).assertStillOnLoginScreen();
+        new LoginValidator(loginScreen).assertLoginScreenOrErrorVisible();
     }
 }

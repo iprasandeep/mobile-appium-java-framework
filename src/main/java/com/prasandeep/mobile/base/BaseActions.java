@@ -35,10 +35,15 @@ public abstract class BaseActions {
     }
 
     protected boolean isDisplayed(By locator) {
+        return WaitUtils.isVisible(locator, 5);
+    }
+
+    protected void hideKeyboardQuietly() {
         try {
-            return WaitUtils.visible(locator).isDisplayed();
-        } catch (RuntimeException e) {
-            return false;
+            driver().hideKeyboard();
+        } catch (RuntimeException ignored) {
+            // Keyboard may already be hidden.
         }
     }
 }
+

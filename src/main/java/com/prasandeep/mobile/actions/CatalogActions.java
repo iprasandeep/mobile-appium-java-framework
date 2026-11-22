@@ -13,6 +13,14 @@ public class CatalogActions extends BaseActions {
 
     public LoginActions openLoginFromMenu() {
         openMenu();
+        // Menu list is long — scroll until Login is visible, then tap.
+        try {
+            driver().findElement(io.appium.java_client.AppiumBy.androidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true))"
+                            + ".scrollIntoView(new UiSelector().description(\"Login Menu Item\"))"));
+        } catch (RuntimeException ignored) {
+            // Already on screen.
+        }
         tap(CatalogLocators.LOGIN_MENU_ITEM);
         return new LoginActions();
     }

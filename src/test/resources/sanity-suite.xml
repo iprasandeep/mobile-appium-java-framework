@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Sanity Suite" verbose="1">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="com.prasandeep.mobile.listeners.TestListener"/>
+    </listeners>
+
+    <test name="All Sanity Cases">
+        <classes>
+            <class name="com.prasandeep.mobile.tests.SanitySuiteTests"/>
+        </classes>
+    </test>
+</suite>
