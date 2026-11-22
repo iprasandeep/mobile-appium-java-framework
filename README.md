@@ -109,3 +109,6 @@ Optional local file (gitignored): `src/test/resources/config.local.properties`
 
 GitHub Actions compiles main + test sources on every push/PR (`mvn compile test-compile`).  
 Full UI suite stays **local** (needs emulator + Appium).
+
+<!-- ci-check: verify PR Actions -->
+
