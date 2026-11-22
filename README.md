@@ -1,12 +1,12 @@
 # mobile-appium-java-framework
 
-Reusable **Android UI automation** framework using **Java · Appium · TestNG · Page Object Model**.
+Reusable **Android UI automation** framework using **Java · Appium · TestNG**, with **locators / actions / validators / tests** separation.
 
-Built for interview / portfolio use by **prasandeep** — covers **login**, **form inputs**, and **error states** against [Sauce Labs My Demo App Android](https://github.com/saucelabs/my-demo-app-android).
+Covers **login**, **form inputs**, and **error states** against [Sauce Labs My Demo App Android](https://github.com/saucelabs/my-demo-app-android). Includes a full **sanity suite** (7 scenarios).
 
 ## Architecture
 
-Layered design (interview-friendly):
+Layered design:
 
 ```text
 tests/          Thin scenarios — call actions + validators only
@@ -109,14 +109,3 @@ Optional local file (gitignored): `src/test/resources/config.local.properties`
 
 GitHub Actions compiles main + test sources on every push/PR (`mvn compile test-compile`).  
 Full UI suite stays **local** (needs emulator + Appium).
-
-## Interview talking points
-
-- Locators / Actions / Validators / Tests are separated (not classic fat POM)
-- Explicit waits over implicit sleeps; screenshots + Extent/Allure on failure
-- Config layered: properties → system props → env vars
-- Suite groups: `smoke`, `login`, `forms`, `negative`
-
-## Author
-
-**prasandeep** — SDET portfolio project (weeks 1–2)
