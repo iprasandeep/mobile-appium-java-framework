@@ -25,6 +25,9 @@ reports/
 test-output/
 allure-results/
 allure-report/
+target/allure-results/
+target/allure-report/
+.allure/
 screenshots/
 logs/
 *.log

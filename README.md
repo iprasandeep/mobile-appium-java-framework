@@ -77,8 +77,10 @@ Smoke-only:
 
 Reports:
 
-- HTML: `reports/extent-report.html`
+- **Allure (recommended UI):** after tests, run `.\mvnw.cmd allure:serve` — opens the modern Allure dashboard in your browser
+- Extent HTML: `reports/extent-report.html` → `Invoke-Item reports\extent-report.html`
 - Screenshots on failure: `screenshots/`
+- Do **not** open `target/surefire-reports/emailable-report.html` if you want Allure — that is TestNG’s plain report
 
 ## Config overrides
 
