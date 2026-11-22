@@ -11,8 +11,9 @@ public class CatalogPage extends BasePage {
     private static final By MENU_BUTTON = AppiumBy.accessibilityId("View menu");
     private static final By LOGIN_MENU_ITEM = AppiumBy.accessibilityId("Login Menu Item");
     private static final By LOGOUT_MENU_ITEM = AppiumBy.accessibilityId("Logout Menu Item");
-    private static final By CATALOG_TITLE = AppiumBy.androidUIAutomator("new UiSelector().text(\"Products\")");
-    private static final By FIRST_PRODUCT = AppiumBy.accessibilityId("Product Item");
+    private static final By CATALOG_TITLE = AppiumBy.id("com.saucelabs.mydemoapp.android:id/productTV");
+    private static final By FIRST_PRODUCT = AppiumBy.androidUIAutomator(
+            "new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/productIV\").instance(0)");
 
     public CatalogPage openMenu() {
         tap(MENU_BUTTON);
@@ -31,9 +32,7 @@ public class CatalogPage extends BasePage {
 
     public boolean isLoggedIn() {
         openMenu();
-        boolean loggedIn = isDisplayed(LOGOUT_MENU_ITEM);
-        // Close drawer by tapping menu again if needed — logout item visibility is enough signal.
-        return loggedIn;
+        return isDisplayed(LOGOUT_MENU_ITEM);
     }
 
     public ProductDetailPage openFirstProduct() {

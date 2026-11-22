@@ -33,3 +33,5 @@ logs/
 src/test/resources/config.local.properties
 .env
 *.pem
+
+uidump*.xml

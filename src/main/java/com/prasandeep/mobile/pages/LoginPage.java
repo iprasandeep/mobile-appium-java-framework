@@ -5,17 +5,15 @@ import org.openqa.selenium.By;
 
 /**
  * Login screen — username, password, submit, and error messaging.
+ * Locators verified against Sauce Labs My Demo App Android 2.2.0.
  */
 public class LoginPage extends BasePage {
 
-    private static final By USERNAME = AppiumBy.accessibilityId("Username input field");
-    private static final By PASSWORD = AppiumBy.accessibilityId("Password input field");
-    private static final By LOGIN_BUTTON = AppiumBy.accessibilityId("Login button");
-    private static final By ERROR_MESSAGE = AppiumBy.xpath(
-            "//*[contains(@text,'provided credentials do not match') or contains(@text,'Password') "
-                    + "or contains(@resource-id,'errorTV') or contains(@resource-id,'tvError')]");
-    private static final By LOGIN_SCREEN_MARKER = AppiumBy.androidUIAutomator(
-            "new UiSelector().textContains(\"Login\")");
+    private static final By USERNAME = AppiumBy.id("com.saucelabs.mydemoapp.android:id/nameET");
+    private static final By PASSWORD = AppiumBy.id("com.saucelabs.mydemoapp.android:id/passwordET");
+    private static final By LOGIN_BUTTON = AppiumBy.id("com.saucelabs.mydemoapp.android:id/loginBtn");
+    private static final By ERROR_MESSAGE = AppiumBy.id("com.saucelabs.mydemoapp.android:id/errorTV");
+    private static final By LOGIN_TITLE = AppiumBy.id("com.saucelabs.mydemoapp.android:id/loginTV");
 
     public LoginPage enterUsername(String username) {
         type(USERNAME, username);
@@ -50,6 +48,6 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isLoginScreenDisplayed() {
-        return isDisplayed(LOGIN_SCREEN_MARKER) || isDisplayed(USERNAME);
+        return isDisplayed(LOGIN_TITLE) || isDisplayed(USERNAME);
     }
 }
